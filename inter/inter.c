@@ -12,33 +12,39 @@
 
 #include <unistd.h>
 
-int	iter(char *str, char c, int len)
+void inter(char *str1, char *str2)
 {
-	int	i;
+    int i;
+    int j;
+    int ascii[256] = {0};
 
-	i = 0;
-	while (str[i] && (i < len || len == -1))
-		if (str[i++] == c)
-	return (1);
+    i = 0;
+    while (str2[i])
+    {
+        if (ascii[(int)str2[i]] == 0)
+            ascii[(int)str2[i]] = 1;
+        i++;
+    }
+
+    i = 0;
+    j = 0;
+    while (str1[i])
+    {
+        if (ascii[(int)str1[i]] == 1)
+        {
+            ascii[(int)str1[i]] = 2;
+            write(1, &str1[i], 1);
+        }
+        i++;
+    }
+
 }
 
-int	main(int argc, char *argv[])
+int     main(int ac, char **av)
 {
-	int	i;
-
-	if (argc == 3)
-	{
-		i = 0;
-		while (argv[1][i])
-		{
-			if (!iter(argv[1], argv[1][i], i) && iter(argv[2], argv[1][i], -1))
-				write(1, &argv[1][i], 1);
-				i += 1;
-		}
-if (argv[1][i] >= 'A' && argv[1][i] <= 'Y')
-                                argv[1][i] +=1;
-	
-	}
-	write(1, "\n", 1);
-	return (0);
+        if (ac == 3)
+                inter(av[1], av[2]);
+        write(1, "\n", 1);
+        return 0;
 }
+
