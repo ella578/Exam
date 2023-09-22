@@ -12,7 +12,7 @@
 
 #include <unistd.h>
 
-int check_repeat(char *str, char c, int n)
+int check(char *str, char c, int n)
 {
     int i = 0;
     
@@ -27,7 +27,9 @@ int check_repeat(char *str, char c, int n)
 
 void ft_strcat(char *s1, char *s2)
 {
-    int i = 0, j = 0;
+    int i = 0;
+    int j = 0;
+    
     while (s1[i] != '\0')
         i++;
     while (s2[j] != '\0')
@@ -39,19 +41,18 @@ void ft_strcat(char *s1, char *s2)
     s1[i] = '\0';
 }
 
-int main(int argc, char *argv[])
+int main(int ac, char *av[])
 {
-    int i, j;
+    int i = 0;
     
-    i = 0;
-    if (argc == 3)
+    if (ac == 3)
     {
-        ft_strcat(argv[1], argv[2]);
-        while (argv[1][i] != '\0')
+        ft_strcat(av[1], av[2]);
+        while (av[1][i] != '\0')
         {
-            if(check_repeat(argv[1], argv[1][i], i))
+            if(check(av[1], av[1][i], i))
             {
-                write(1, &argv[1][i], 1);
+                write(1, &av[1][i], 1);
             }
             i++;
         }
