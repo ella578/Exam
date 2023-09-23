@@ -9,38 +9,38 @@
 /*   Updated: 2022/11/30 17:21:52 by ewang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include <stdlib.h>
 
-static int	count(int n)
+static int	count(int nbr)
 {
 	int	i;
 
-	if (n == 0)
+	if (nbr == 0)
 		i = 1;
 	else
 		i = 0;
-	while (n)
+	while (nbr)
 	{
-		n = n / 10;
+		nbr = nbr / 10;
 		i++;
 	}
 	return (i);
 }
 
-char	*ft_itoa(int n)
+char	*ft_itoa(int nbr)
 {
 	char			*dst;
 	size_t			len;
 	unsigned int	nb;
 
-	len = count(n);
-	if (n < 0)
+	len = count(nbr);
+	if (nbr < 0)
 	{
 		len = len + 1;
-		nb = -n;
+		nb = -nbr;
 	}
 	else
-		nb = n;
+		nb = nbr;
 	dst = (char *)malloc(sizeof(char) * len + 1);
 	if (!dst)
 		return (NULL);
@@ -50,7 +50,7 @@ char	*ft_itoa(int n)
 		dst[len] = nb % 10 + '0';
 		nb = nb / 10;
 	}
-	if (n < 0)
+	if (nbr < 0)
 		dst[0] = '-';
 	return (dst);
 }
