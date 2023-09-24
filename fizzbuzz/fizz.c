@@ -1,45 +1,46 @@
 #include <unistd.h>
 
-void charyaz(char c)
+void ft_putchar(char c)
 {
     write(1, &c, 1);
 }
-void yaznumber(int n)
+void ft_putnbr(int n)
 {
     if (n > 9)
     {
-        yaznumber(n / 10);
-        yaznumber(n % 10);      
+        ft_putnbr(n / 10);
+        ft_putnbf(n % 10);      
     }
     else
     {
-        charyaz(n + 48);
+        ft_putchar(n + 48);
     }
 }
 int main()
 {
-    int x;
+    int i;
 
-    x = 1;
-    while(x <= 100)
+    i = 1;
+    while(i <= 100)
     {
-        if (x % 15 == 0)
+        if (i % 15 == 0)
         {
             write(1, "fizzbuzz\n", 9);
         }
-        else if (x % 3 == 0)
+        else if (i % 3 == 0)
         {
             write(1, "fizz\n", 5);
         }
-        else if (x % 5 == 0)
+        else if (i % 5 == 0)
         {
             write(1, "buzz\n", 5);
         }
         else
         {
-            yaznumber(x);
+            ft_putnbr(i);
             write(1, "\n", 1);
         }
-        x++;
+        i++;
     }
+    return(0);
 }
