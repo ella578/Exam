@@ -12,21 +12,26 @@
 
 #include <stdlib.h>
 
-int	*ft_range(int min, int max)
+int *ft_range(int start, int end)
 {
-	int	*res;
-	int	i;
-
-	if (min >= max)
-		return (NULL);
-	res = malloc((max - min) * sizeof(int));
-	if (!res)
-		return (NULL);
-	i = 0;
-	while (i < max - min)
+	int i = 0;
+	int len = abs((end - start)) + 1;
+	int *res = (int *)malloc(sizeof(int) * len);
+	
+	while (i < len)
 	{
-		res[i] = min + i;
-		i++;
+		if (start < end)
+		{
+			res[i] = start;
+			start++;
+			i++;
+		}
+		else
+		{
+			res[i] = start;
+			start--;
+			i++;
+		}
 	}
-	return (res);
+        return (res);
 }
