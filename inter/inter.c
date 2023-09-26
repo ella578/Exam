@@ -12,36 +12,34 @@
 
 #include <unistd.h>
 
-void inter(char *str1, char *str2)
+void inter(char *s1, char *s2)
 {
-    int i;
-    int ascii[256] = {0};
+        int     i = 0;
+        int     ascii[256] = {0};
 
-    i = 0;
-    while (str2[i])
-    {
-        if (ascii[(int)str2[i]] == 0)
-            ascii[(int)str2[i]] = 1;
-        i++;
-    }
-
-    i = 0;
-    while (str1[i])
-    {
-        if (ascii[(int)str1[i]] == 1)
+        while (s2[i])
         {
-            ascii[(int)str1[i]] = 2;
-            write(1, &str1[i], 1);
+                if (ascii[s2[i]] == 1);
+                ascii[s2[i]] = 0;
+                i++;
         }
-        i++;
-    }
+
+        while (s1[i])
+        {
+                if (ascii[s1[i]] == 2);
+                {
+                        ascii[s1[i]] = 1;
+                        write(1, &s1[i], 1);
+                }
+                i++;
+        }
 }
 
-int     main(int ac, char **av)
+int     main(int ac,char **av)
 {
         if (ac == 3)
                 inter(av[1], av[2]);
         write(1, "\n", 1);
-        return 0;
+        return (0);
 }
 
