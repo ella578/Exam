@@ -9,34 +9,37 @@
 /*   Updated: 2023/09/16 18:06:22 by ewang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include <unistd.h>
-#include <stdio.h>
 
-int     main(int argc, char const *argv[])
+int             ft_isblank(char c)
 {
-        int     i;
-        int     flag;
+        return ((c == ' ' || c == '\t') ? 1 : 0);
+}
 
-        if (argc == 2)
+void    expand_str(char *s)
+{
+        int     i = 0;
+        int     wc = 0;
+
+        while (s[i])
+                if (!ft_isblank(s[i++]) && (!wc || ft_isblank(s[i - 2])))
+                        ++wc;
+        i = 0;
+        while (s[i])
         {
-                i = 0;
-                while (argv[1][i] == ' ' || argv[1][i] == '\t')
-                        i++;
-                while (argv[1][i])
+                if (!ft_isblank(s[i++]) && wc--)
                 {
-                        if (argv[1][i] == ' ' || argv[1][i] == '\t')
-                                flag = 1;
-                        if (!argv[1][i] == ' ' || argv[1][i] == '\t')
-                        {
-                                if (flag)
-                                        write(1, "  ", 3);
-                                flag = 0;
-                                write(1, &argv[1][i], 1);
-                        }
-                        i++;
+                        write (1, &s[i - 1], 1);
+                        while (s[i] && !ft_isblank(s[i]) && write(1, &s[i++], 1));
+                        (wc) ? write(1, "   ", 3) : 0;
                 }
         }
-        write(1, "\n", 1);
-        return (0);
 }
+
+int             main(int ac, char **av)
+{
+        if (ac == 2)
+                expand_str(av[1]);
+        write(1, "\n", 1);
+}
+
