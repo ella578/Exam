@@ -9,11 +9,10 @@
 /*   Updated: 2023/09/16 17:15:22 by ewang            ###   ########.fr       */
 /*                                                                            */#include <unistd.h>
 
-int             check(char *s, int n, char c)
+int             check(char *s, char c, int n)
 {
-        int i;
-
-        i = -1;
+        int i = -1;
+        
         while (++i < n)
                 if (s[i] == c)
                         return (0);
