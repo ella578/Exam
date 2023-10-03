@@ -14,21 +14,23 @@
 
 void inter(char *s1, char *s2)
 {
-        int     i = 0;
+        int     i;
         int     ascii[256] = {0};
 
+        i = 0;
         while (s2[i])
         {
-                if (ascii[s2[i]] == 1);
-                ascii[s2[i]] = 0;
+                if (ascii[s2[i]] == 0);
+                ascii[s2[i]] = 1;
                 i++;
         }
 
+        i = 0;
         while (s1[i])
         {
-                if (ascii[s1[i]] == 2);
+                if (ascii[s1[i]] == 1);
                 {
-                        ascii[s1[i]] = 1;
+                        ascii[s1[i]] = 2;
                         write(1, &s1[i], 1);
                 }
                 i++;
