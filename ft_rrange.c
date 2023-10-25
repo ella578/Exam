@@ -9,23 +9,31 @@
 /*   Updated: 2023/09/16 17:52:56 by ewang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include <stdlib.h>
+#include <stdio.h>
 
-int *ft_rrange(int start, int end)
+int     *ft_rrange(int start, int end)
 {
-        int *rrange;
-        int i = 0;
+        int     size;
+        int     *res;
 
-        if (start > end)
-                rrange = (int *)malloc(sizeof(int) * (start - end) + 1);
-        else
-                rrange = (int *)malloc(sizeof(int) * (end - start) + 1);
-        while (start != end)
+
+        size = end >= start ? end - start : start - end;
+        res = malloc((size + 1) * sizeof(int));
+        if (!res)
+                return (NULL);
+
+        if (start < end)
         {
-                rrange[i++] = end;
-                end -= (start > end) ? -1 : 1;
+                while (start <= end)
+                 res[size--] = start++;
         }
-        rrange[i] = end;
-        return (rrange);
+                else
+                {
+                  while (start >= end)
+                  res[size--] = start--;
+          }
+        return (res);
 }
+
+
