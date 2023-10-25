@@ -10,51 +10,42 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+Write function that prints  a string but in reverse order. It must return its parameter. Beware that the string wont be modifiable. your function must be declared as follows: 
+char  *rev_print(char   *str); 
 
-int	main(int argc, char *argv[])
+
+#include <unistd.h>
+#include <stdio.h>
+
+char *re_print(char *str)
 {
-	int	i;
-	
-	i = 0;
-	if (argc == 2)
-	{
-		while (argv[1][i])
-			i += 1;
-		while (i)
-			write(1, &argv[1][--i], 1);
-	}
-	write(1, "\n", 1);
-	return (0);
+        int     i = 0;
+
+        while(str[i])
+                i++;
+        while(i)
+                write(1, &str[--i],1);
+        return(str);
 }
 
+int     main(int ac, char **av)
+{
+        if (ac == 2)
+        re_print(av[1]);
+                        write (1, "\n", 1);
+        return(0);
+}
+
+-----------------------------------------------------------------------
+char *rev_print(char *str)
+{
+    if (*str)
+    {
+        rev_print(str + 1);
+        write(1, str, 1);
+    }
+
+    return (str);
+}
 --------------------------------
-
-#include <unistd.h>
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-int		main(int argc, char **argv)
-{
-	int	i;
-
-	i = 0;
-	if (argc == 2)
-	{
-		while (argv[1][i] != '\0')
-		{
-			i++;
-		}
-		while (i >= 0)
-		{
-			ft_putchar(argv[1][i]);
-			i--;
-		}
-	}
-	ft_putchar('\n');
-	return (0);
-}
 
