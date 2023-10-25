@@ -9,78 +9,37 @@
 /*   Updated: 2023/09/27 15:14:59 by ewang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include <stdlib.h>
 
-int			ft_isspace(char c)
+char            **ft_split(char *str)
 {
-	return (c == ' ' || c == '\n' || c == '\t');
+        int             i;
+        int             j;
+        int             k;
+        char    **split;
+
+        i = 0;
+        k = 0;
+        if (!(split = (char **)malloc(sizeof(char *) * 256)))
+                return (NULL);
+        while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
+                i += 1;
+        while (str[i])
+        {
+                j = 0;
+                if (!(split[k] = (char *)malloc(sizeof(char) * 4096)))
+                        return (NULL);
+                while (str[i] != ' ' && str[i] != '\t' && str[i] != '\n' && str[i])
+                        split[k][j++] = str[i++];
+                while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
+                        i += 1;
+                split[k][j] = '\0';
+                k += 1;
+        }
+        split[k] = NULL;
+        return (split);
 }
 
-int		count_words(char *str)
-{
-	int	count;
-
-	count = 0;
-	while (*str)
-	{
-		// move to the beggining of a new word
-		while (*str && ft_isspace(*str))
-			str++;
-		if (*str && !ft_isspace(*str))
-		{
-			count++;
-			// move to the next whitespace
-			while (*str && !ft_isspace(*str))
-				str++;
-		}
-	}
-	return (count);
-}
-
-char	*malloc_word(char *str)
-{
-	char *word;
-	int	i;
-
-	i = 0;
-	while (str[i] && !ft_isspace(str[i]))
-		i++;
-	word = (char *)malloc(sizeof(char) * (i + 1));
-	i = 0;
-	while (str[i] && !ft_isspace(str[i]))
-	{
-		word[i] = str[i];
-		i++;
-	}
-	word[i] = '\0';
-	return (word);
-}
-
-char	**ft_split(char *str)
-{
-	char **arr = (char **)malloc(sizeof(char *) * (count_words(str) + 1));
-
-	// same as count_words, except we save word to array instead of counting
-	int i = 0;
-	while (*str)
-	{
-		// move to the beggining of a new word
-		while (*str && ft_isspace(*str))
-			str++;
-		if (*str && !ft_isspace(*str))
-		{
-			// save word to array
-			arr[i] = malloc_word(str);
-			i++;
-			// move to the next whitespace
-			while (*str && !ft_isspace(*str))
-				str++;
-		}
-	}
-	arr[i] = NULL;
-	return (arr);
-}
 
 // #include <stdio.h>
 
