@@ -20,37 +20,42 @@ char            **ft_split(char *str)
 
         i = 0;
         k = 0;
-        if (!(split = (char **)malloc(sizeof(char *) * 256)))
+        split = (char **)malloc(sizeof(char *) * 256)))
+        if(!split)
                 return (NULL);
         while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
-                i += 1;
+                i++ 1;
         while (str[i])
         {
                 j = 0;
-                if (!(split[k] = (char *)malloc(sizeof(char) * 4096)))
+                split[k] = (char *)malloc(sizeof(char) * 4096)))
+                if(!split[k])
                         return (NULL);
-                while (str[i] != ' ' && str[i] != '\t' && str[i] != '\n' && str[i])
+                
+                while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
                         split[k][j++] = str[i++];
                 while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
-                        i += 1;
+                        i ++;
                 split[k][j] = '\0';
-                k += 1;
+                k ++;
         }
         split[k] = NULL;
         return (split);
 }
 
 
-// #include <stdio.h>
+#include <stdio.h>
 
-// int		main(int ac, char **av)
-// {
-// 	char **arr;
+int		main(int ac, char **av)
+{
+ 	(void)ac;
+        char **arr;
+	char *phrase = "   Hello,   what\t good!  ";
 
-// 	char *phrase = "   Hello,   Flavio\t Wuensche!  ";
-// 	arr = ft_split(phrase);
-// 	printf("%s\n", arr[0]);
-// 	printf("%s\n", arr[1]);
-// 	printf("%s\n", arr[2]);
-// 	printf("%s\n", arr[3]);
-// }
+        arr = ft_split(phrase);
+ 	
+        printf("%s\n", arr[0]);
+ 	printf("%s\n", arr[1]);
+ 	printf("%s\n", arr[2]);
+ 	printf("%s\n", arr[3]);
+ }
