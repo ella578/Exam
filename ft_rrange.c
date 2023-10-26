@@ -36,4 +36,20 @@ int     *ft_rrange(int start, int end)
         return (res);
 }
 
+#include <stdio.h>
+int main(int ac, char **av)
+{
+        (void)ac;
+        int     arr_len;
+        int     *arr;
+        arr_len = abs(atoi(av[2]) - atoi(av[1]));
+        arr = ft_rrange(atoi(av[1]), atoi(av[2]));
+        for (int i = 0; i <= arr_len; i += 1)
+                printf("%d\n", arr[i]);
+        free(arr);
+        return (0);
+}
+
+
+
 
