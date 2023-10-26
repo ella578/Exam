@@ -45,16 +45,20 @@ int     *ft_range(int start, int end)
 }
 
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(int ac, char **av)
 {
-        (void)ac;
-        int     arr_len;
-        int     *arr;
+    (void)ac;
 
-        arr_len = abs(atoi(av[2]) - atoi(av[1]));
-        arr = ft_range(atoi(av[1]), atoi(av[2]));
-        for (int i = 0; i <= arr_len; i += 1)
-                printf("%d\n", arr[i]);
-        free(arr);
-        return (0);
+    int start = atoi(av[1]);
+    int end = atoi(av[2]);
+    int *arr = ft_range(start, end);
+
+    for (int i = 0; i <= abs(end - start); i++)
+        printf("%d\n", arr[i]);
+
+    free(arr);
+    return (EXIT_SUCCESS);
+}
+          
